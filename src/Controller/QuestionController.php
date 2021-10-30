@@ -22,4 +22,11 @@ class QuestionController
         return new Response('strona info o zespole');
     }
 
+    /**
+     * @Route ("/kontakt/contact-with-us")
+     */
+    public function contactUs()
+    {
+        return new Response('skontaktuj sie z nami');
+    }
 }
