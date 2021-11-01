@@ -32,4 +32,12 @@ class Controller extends AbstractController
     {
         return $this->render('Sites/Contact.html.twig');
     }
+
+    /**
+     * @Route ("/Login")
+     */
+    public function Login()
+    {
+        return $this->render('Sites/Login.html.twig');
+    }
 }
