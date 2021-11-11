@@ -18,17 +18,17 @@ class Controller extends AbstractController
     /**
      * @Route ("/About Us/")
      */
-    public function AboutUs()
+    public function AboutUs(): Response
     {
-       return $this->render('Sites/AboutUs.html.twig', [
-           'AboutUs' => ("We are the best band in the world!")
-       ]);
+       return $this->render('Sites/AboutUs.html.twig');
+
+
     }
 
     /**
      * @Route ("/Contact")
      */
-    public function ContactUs()
+    public function ContactUs(): Response
     {
         return $this->render('Sites/Contact.html.twig');
     }
@@ -39,5 +39,21 @@ class Controller extends AbstractController
     public function Login()
     {
         return $this->render('Sites/Login.html.twig');
+    }
+
+    /**
+     * @Route ("/Calendar")
+     */
+    public function Calendar(): Response
+    {
+        return $this->render('Sites/Calendar.html.twig');
+    }
+
+    /**
+     * @Route ("/Register")
+     */
+    public function Register(): Response
+    {
+        return $this->render('Sites/Register.html.twig');
     }
 }

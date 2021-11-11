@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+{% block title %}Góra Trolla - Kalendarz{% endblock %}
+{% block body %}
+    <h2> Kalendarz </h2>
+    {% set time = "now"|date("U") %}
+<div>
+    <iframe src="https://calendar.google.com/calendar/embed?src=que5p4p9c4dj4e6q0qo866h64k%40group.calendar.google.com&ctz=Europe%2FWarsaw" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+</div>
+{% endblock %}
