@@ -4,25 +4,23 @@ $dsn = 'pgsql:dbname=postgres;host=localhost';
 $user = 'adam';
 $password = '';
 
-
-function Noslash($noslash)
-{
-    if (get_magic_quotes_gpc())
-        $noslash = stripslashes($noslash);
-    return $noslash;
-}
-
-    if (isset($_POST['loguj']))
+    if (isset($_POST['submit']))
     {
-        $login = Noslash($_POST['login']);
-        $haslo = Noslash($_POST['haslo']);
-        $ip = Noslash($_SERVER['REMOTE_ADDR']);
-
-
-
-            $_SESSION['zalogowany'] = true;
-            $_SESSION['login'] = $login;
-
+        try {
+            $baza = new PDO('pgsql:dbname=postgres;host=localhost', 'adam', '');
+            $baza = pg_connect('users');
+            $login = Noslash($_POST['username']);
+            $haslo = Noslash($_POST['password']);
+            $insert = pg_insert($baza, $login,$_POST, PG_DML_ESCAPE);
+            if($insert){
+                echo 'siadlo';
+            }else{
+                echo 'dupa';
+            }
+        }
+        catch (PDOException $error){
+            echo $error->getMessage();
+        }
     }
 
 

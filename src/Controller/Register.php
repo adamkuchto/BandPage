@@ -1,33 +1,33 @@
 <?php
-namespace App\Controller\Register;
-
-use PDO;
-
+//require_once '/home/adam/BandPage/templates/Sites/Register.html.twig';
+try {
 $pdo = new PDO('pgsql:dbname=postgres;host=localhost', 'adam', '');
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-function Noslash($noslash)
+function Noslash($noslash):string
 {
-    if (get_magic_quotes_gpc())
-        $noslash = stripslashes($noslash);
+    $noslash = stripslashes($noslash);
+    $noslash = strip_tags($noslash);
     return $noslash;
 }
 
-if (isset($_POST['rejestruj'])) {
-    $login = Noslash($_POST['login']);
-    $haslo1 = Noslash($_POST['haslo1']);
-    $haslo2 = Noslash($_POST['haslo2']);
-    $email = Noslash($_POST['email']);
-    $ip = Noslash($_SERVER['REMOTE_ADDR']);
+if (isset($_POST['submit'])) {
+    $login = Noslash($_POST['Rusername']);
+    $haslo1 = $_POST['Rpassword1'];
+    $haslo2 = $_POST['Rpassword2'];
+    $email = $_POST['email'];
 
-    $conn = pg_pconnect("dbname=users");
-    $query = "SELECT login FROM users WHERE login = $login";
-    if (pg_query($conn, $query) == 0) {
-        if ($haslo1 == $haslo2)
+        if ($haslo1 === $haslo2)
         {
-
+            $superpass = password_hash($haslo1,PASSWORD_BCRYPT);
+            $query = "INSERT INTO users VALUES('$login','$superpass','$email')";
+            $stmt= $pdo->prepare($query);
+            $pdo->query($query);
 
             echo "Konto zostało utworzone!";
+            session_start();
         } else echo "Hasła nie są takie same";
-    } else echo "Podany login jest już zajęty.";
+}
+}catch(PDOException $e){
+    echo $e->getMessage();
 }
