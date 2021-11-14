@@ -33,13 +33,7 @@ class Controller extends AbstractController
         return $this->render('Sites/Contact.html.twig');
     }
 
-    /**
-     * @Route ("/Login")
-     */
-    public function Login()
-    {
-        return $this->render('Sites/Login.html.twig');
-    }
+
 
     /**
      * @Route ("/Calendar")
@@ -49,11 +43,6 @@ class Controller extends AbstractController
         return $this->render('Sites/Calendar.html.twig');
     }
 
-    /**
-     * @Route ("/Register")
-     */
-    public function Register(): Response
-    {
-        return $this->render('Sites/Register.html.twig');
-    }
+
+
 }
